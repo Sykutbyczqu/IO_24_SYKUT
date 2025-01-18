@@ -1,7 +1,8 @@
+// GrassField.java
 package zse.spec.oop.model;
 
 import java.util.*;
-import zse.spec.oop.model.Vector2d;
+
 import zse.spec.oop.model.util.MapVisualizer;
 
 public class GrassField extends AbstractWorldMap {
@@ -28,14 +29,29 @@ public class GrassField extends AbstractWorldMap {
         if (super.isOccupied(position)) {
             return super.objectAt(position);
         }
-        return grasses.get(position);
+        if (grasses.containsKey(position)) {
+            return grasses.get(position);
+        }
+        return null;
     }
 
     @Override
-    public Collection<WorldElement> getElements() {
-        Set<WorldElement> elements = new HashSet<>(super.getElements());
-        elements.addAll(grasses.values());
-        return elements;
+    public boolean canMoveTo(Vector2d position) {
+        return true;
+    }
+
+    @Override
+    public void move(Animal animal, MoveDirection direction) {
+        Vector2d oldPosition = animal.getPosition();
+        animal.move(direction, this);
+        Vector2d newPosition = animal.getPosition();
+        if (!oldPosition.equals(newPosition)) {
+            animals.remove(oldPosition);
+            animals.put(newPosition, animal);
+            System.out.println("Animal moved from " + oldPosition + " to " + newPosition);
+        } else {
+            System.out.println("Animal did not move from " + oldPosition);
+        }
     }
 
     @Override
@@ -52,12 +68,14 @@ public class GrassField extends AbstractWorldMap {
         int maxX = 0;
         int maxY = 0;
         for (Vector2d position : grasses.keySet()) {
-            if (position.getX() > maxX) maxX = position.getX();
-            if (position.getY() > maxY) maxY = position.getY();
+            if (position.x() > maxX) maxX = position.x();
+            if (position.y() > maxY) maxY = position.y();
         }
-        for (Vector2d position : animals.keySet()) {
-            if (position.getX() > maxX) maxX = position.getX();
-            if (position.getY() > maxY) maxY = position.getY();
+        if (animals != null) {
+            for (Vector2d position : animals.keySet()) {
+                if (position.x() > maxX) maxX = position.x();
+                if (position.y() > maxY) maxY = position.y();
+            }
         }
         return new Vector2d(maxX, maxY);
     }

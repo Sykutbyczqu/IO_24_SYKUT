@@ -6,8 +6,8 @@ import java.util.List;
 
 public class World {
     public static void main(String[] args) {
-        List<MoveDirection> directions = List.of(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT);
-        List<Vector2d> positions = List.of(new Vector2d(1, 2), new Vector2d(1, 2));
+        List<MoveDirection> directions = OptionsParser.parse(args);
+        List<Vector2d> positions = List.of(new Vector2d(1, 2));
         GrassField map = new GrassField(5);
         Simulation simulation = new Simulation(directions, positions, map);
         simulation.run();

@@ -1,21 +1,6 @@
 package zse.spec.oop.model;
 
-public class Vector2d {
-    private final int x;
-    private final int y;
-
-    public Vector2d(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+public record Vector2d(int x, int y) {
 
     @Override
     public String toString() {
@@ -53,33 +38,8 @@ public class Vector2d {
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
-        if (!(other instanceof Vector2d)) return false;
-        Vector2d that = (Vector2d) other;
+        if (!(other instanceof Vector2d that)) return false;
         return this.x == that.x && this.y == that.y;
     }
 
-    @Override
-    public int hashCode() {
-        return 31 * x + y;
-    }
-
-    public boolean clone(Vector2d newPosition) {
-        return newPosition.x >= 0 && newPosition.y >= 0;
-
-    }
-
-    public Vector2d add(String string) {
-        switch (string) {
-            case "N":
-                return new Vector2d(0, 1);
-            case "S":
-                return new Vector2d(0, -1);
-            case "W":
-                return new Vector2d(-1, 0);
-            case "E":
-                return new Vector2d(1, 0);
-            default:
-                throw new IllegalArgumentException();
-        }
-    }
 }
