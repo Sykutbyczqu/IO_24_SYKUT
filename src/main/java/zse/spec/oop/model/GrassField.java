@@ -2,8 +2,8 @@
 package zse.spec.oop.model;
 
 import java.util.*;
+import zse.spec.oop.util.MapVisualizer;
 
-import zse.spec.oop.model.util.MapVisualizer;
 
 public class GrassField extends AbstractWorldMap {
     private final Map<Vector2d, Grass> grasses = new HashMap<>();

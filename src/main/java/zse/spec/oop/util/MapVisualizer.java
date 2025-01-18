@@ -1,4 +1,4 @@
-package zse.spec.oop.model.util;
+package zse.spec.oop.util;
 
 import zse.spec.oop.model.Vector2d;
 import zse.spec.oop.model.WorldMap;
