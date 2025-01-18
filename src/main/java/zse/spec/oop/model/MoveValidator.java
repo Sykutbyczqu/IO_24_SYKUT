@@ -1,7 +1,4 @@
 package zse.spec.oop.model;
-
-import zse.spec.oop.model.Vector2d;
-
 public interface MoveValidator {
 
     /**

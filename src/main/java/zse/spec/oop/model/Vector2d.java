@@ -67,4 +67,19 @@ public class Vector2d {
         return newPosition.x >= 0 && newPosition.y >= 0;
 
     }
+
+    public Vector2d add(String string) {
+        switch (string) {
+            case "N":
+                return new Vector2d(0, 1);
+            case "S":
+                return new Vector2d(0, -1);
+            case "W":
+                return new Vector2d(-1, 0);
+            case "E":
+                return new Vector2d(1, 0);
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 }

@@ -1,11 +1,12 @@
+// Animal.java
 package zse.spec.oop.model;
 
-public class Animal {
+public class Animal implements WorldElement {
     private MapDirection orientation;
     private Vector2d position;
 
     public Animal() {
-        this.position = new Vector2d(2, 2);
+        this.position = new Vector2d(1, 2);
         this.orientation = MapDirection.NORTH;
     }
 
@@ -14,11 +15,12 @@ public class Animal {
         this.orientation = MapDirection.NORTH;
     }
 
+    @Override
     public Vector2d getPosition() {
         return position;
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction, MoveValidator validator) {
         Vector2d newPosition;
         switch (direction) {
             case RIGHT:
@@ -29,14 +31,20 @@ public class Animal {
                 break;
             case FORWARD:
                 newPosition = this.position.add(this.orientation.toUnitVector());
-                if (position.clone(newPosition)) {
+                if (validator.canMoveTo(newPosition)) {
                     this.position = newPosition;
+                    System.out.println("Moved to: " + newPosition);
+                } else {
+                    System.out.println("Cannot move to: " + newPosition);
                 }
                 break;
             case BACKWARD:
                 newPosition = this.position.subtract(this.orientation.toUnitVector());
-                if (position.clone(newPosition)) {
+                if (validator.canMoveTo(newPosition)) {
                     this.position = newPosition;
+                    System.out.println("Moved to: " + newPosition);
+                } else {
+                    System.out.println("Cannot move to: " + newPosition);
                 }
                 break;
         }
