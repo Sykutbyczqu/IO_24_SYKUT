@@ -38,8 +38,8 @@ public record Vector2d(int x, int y) {
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
-        if (!(other instanceof Vector2d that)) return false;
-        return this.x == that.x && this.y == that.y;
+        if (!(other instanceof Vector2d(int x1, int y1))) return false;
+        return this.x == x1 && this.y == y1;
     }
 
 }
